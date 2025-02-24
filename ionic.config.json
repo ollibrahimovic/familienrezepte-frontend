@@ -1,0 +1,7 @@
+{
+  "name": "steffikost-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

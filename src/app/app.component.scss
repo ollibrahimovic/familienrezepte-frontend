@@ -1,0 +1,14 @@
+html, body, ion-app, ion-content {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f0f0f5;
+  }
+  
+  ion-item, ion-input, ion-label, ion-select, ion-textarea {
+    all: unset;
+    display: block;
+    width: 100%;
+  }
+  
