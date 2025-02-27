@@ -5,6 +5,7 @@ import { AlertController, IonApp, IonRouterOutlet,Platform } from '@ionic/angula
 import { addIcons } from 'ionicons';
 import { homeOutline,heartOutline, addCircleOutline, heart, removeOutline, closeOutline, restaurant, list,close } from 'ionicons/icons';
 import { Location } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -35,19 +36,22 @@ export class AppComponent {
 
   initializeApp() {
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+      
+        console.log('appUrlOpen', event.url);
         this.zone.run(() => {
-            // Example url: https://beerswift.app/tabs/tab2
-            // slug = /tabs/tab2
-            ///https://familienrezepte.app/app/detail/67bee7b8e53d967336546457
-            const slug = event.url.split(".app").pop();
-            if (slug) {
-                this.router.navigateByUrl(slug);
+            if (event.url.includes(environment.frontend)) {
+              const slug = event.url.split(".com").pop();
+              console.log('slug', slug);
+
+              if (slug) {
+                  console.log('this.router.navigateByUrl(slug);', slug);
+
+                  this.router.navigateByUrl(slug);
+              }
             }
-            // If no match, do nothing - let regular routing
-            // logic take over
         });
     });
-    console.log(this.location.path());
+    
     this.platform.ready().then(() => {
       this.platform.backButton.subscribeWithPriority(999, () => {
         console.log('Back Pressed');
