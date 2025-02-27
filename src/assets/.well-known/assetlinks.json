@@ -1,0 +1,13 @@
+[
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.hukedev.familyrecipes",
+        "sha256_cert_fingerprints": [
+          "D8:E1:36:1A:72:E2:BD:54:E1:AA:75:07:91:E9:D9:3D:CD:E8:E9:41:BF:E0:C6:52:3D:B1:DC:54:C2:66:4C:F0"
+        ]
+      }
+    }
+]
+  
