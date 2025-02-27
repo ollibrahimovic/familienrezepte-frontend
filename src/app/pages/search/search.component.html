@@ -3,3 +3,21 @@
     <ion-title>Rezept suchen</ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content [fullscreen]="true">  
+  <ion-searchbar show-clear-button="always" [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
+
+  <ion-list>
+    @for (recipe of results; track recipe) {
+    <ion-item>
+      <ion-thumbnail slot="start"  [routerLink]="['/app/detail', recipe._id]">
+        <img [src]="recipe.image" alt="{{recipe.title}}">
+      </ion-thumbnail>
+      <ion-label [routerLink]="['/app/detail', recipe._id]">
+        <h2>{{ recipe.title }}</h2>
+        <p color="light">{{ recipe.portionsangabe}}</p>
+      </ion-label>
+    </ion-item>
+    }
+  </ion-list>
+</ion-content>

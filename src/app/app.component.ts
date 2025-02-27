@@ -1,9 +1,10 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, Optional, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { IonApp, IonRouterOutlet,Platform } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { homeOutline,heartOutline, addCircleOutline, heart, removeOutline, closeOutline, restaurant, list,close } from 'ionicons/icons';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,12 @@ import { homeOutline,heartOutline, addCircleOutline, heart, removeOutline, close
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-  constructor(private router: Router, private zone: NgZone) {
+  constructor(private router: Router, private zone: NgZone, private platform: Platform, private location: Location,  // Hier hinzufügen
+
+    @Optional() private routerOutlet?: IonRouterOutlet
+  ) {
+
+
     this.initializeApp();
    
     addIcons({
@@ -24,7 +30,7 @@ export class AppComponent {
       'close-outline': closeOutline,
       'list': list,
       'restaurant': restaurant
-    });
+    });   
   }
 
   initializeApp() {
@@ -41,5 +47,23 @@ export class AppComponent {
             // logic take over
         });
     });
-}
+
+    this.platform.ready().then(() => {
+      this.platform.backButton.subscribeWithPriority(999, () => {
+        console.log('Back Pressed');
+  
+        // Wenn Router Outlet vorhanden und kann zurück navigieren
+        if (this.routerOutlet && this.routerOutlet.canGoBack()) {
+          this.routerOutlet.pop();
+        }
+        // Ansonsten mit Angular Location zurück navigieren
+        else {
+          this.zone.run(() => {
+            this.location.back();
+          });
+        }
+      });
+    });
+
+  }
 }
