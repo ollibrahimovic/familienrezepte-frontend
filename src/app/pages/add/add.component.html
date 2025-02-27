@@ -1,0 +1,58 @@
+<ion-header class="header">
+  <ion-toolbar>
+    <ion-title>Rezept Hinzufügen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <ion-list>
+
+      <ion-item>
+        <ion-input label="Titel" labelPlacement="floating"  formControlName="title" placeholder="Mein Rezept..."></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input labelPlacement="floating" formControlName="imageUrl" label="Bild-URL" placeholder="http://www.meinbild.de/essen.jpg"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-select formControlName="category" label="Kategorie" labelPlacement="floating">
+          <ion-select-option *ngFor="let category of categories" [value]="category">{{ category.name }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea formControlName="description" label="Beschreibung" labelPlacement="floating" placeholder=""></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="portionsangabe" label="Portionsangabe" labelPlacement="floating" placeholder="4 Portionen, 2 Stück, 1 Liter"></ion-input>
+      </ion-item>
+      <ion-list>
+        <ion-list-header>
+          <ion-label>Zutaten</ion-label>
+          <ion-button fill="clear" (click)="addIngredientField()">
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-list-header>
+      
+        <div formArrayName="ingredients">
+          <ion-item *ngFor="let ingredient of ingredients.controls; let i=index" [formGroupName]="i">
+            <ion-input formControlName="name" placeholder="100ml Milch" label="Zutat {{(i+1)}}" labelPlacement="floating"></ion-input>
+            <ion-button fill="clear" color="danger" (click)="removeIngredientField(i)">
+              <ion-icon name="remove-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+      
+        </div>
+      </ion-list>
+    </ion-list>
+
+    <ion-button expand="block" type="submit" [disabled]="recipeForm.invalid">
+      Rezept hinzufügen
+    </ion-button>
+  </form>
+</ion-content>
+
+

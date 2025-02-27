@@ -24,6 +24,7 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
 /**
  * Ionic Dark Mode
  * -----------------------------------------------------
@@ -35,10 +36,37 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
 
-ion-icon {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    font-size: 24px;
-    color: #000;  // Farbe ändern nach Bedarf
+.app-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
+
+  ion-thumbnail {
+    width: 60px;
+    height: 60px;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+    }
+  }
+
+ .detail_bild {
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+
+.header {
+  --sat: env(safe-area-inset-top);
+
+	padding-top: max(30px, var(--sat)); // Define a minimum safe space by default
+		
+	html.plt-ios & {
+		padding-top: var(--sat); // Use the detected safe-space for IOS because I always get a good value
+	}
+}
+  
