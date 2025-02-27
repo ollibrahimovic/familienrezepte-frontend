@@ -36,22 +36,18 @@ export class AppComponent {
 
   initializeApp() {
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
-      
-        console.log('appUrlOpen', event.url);
         this.zone.run(() => {
-            if (event.url.includes(environment.frontend)) {
-              const slug = event.url.split(".com").pop();
-              console.log('slug', slug);
-
-              if (slug) {
-                  console.log('this.router.navigateByUrl(slug);', slug);
-
-                  this.router.navigateByUrl(slug);
-              }
+            // Example url: https://beerswift.app/tabs/tab2
+            // slug = /tabs/tab2
+            const slug = event.url.split(".com").pop();
+            if (slug) {
+                this.router.navigateByUrl(slug);
             }
+            // If no match, do nothing - let regular routing
+            // logic take over
         });
     });
-    
+   
     this.platform.ready().then(() => {
       this.platform.backButton.subscribeWithPriority(999, () => {
         console.log('Back Pressed');
