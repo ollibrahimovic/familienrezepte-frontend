@@ -4,41 +4,49 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">  
-  <ion-list>
-    <ion-accordion-group #accordionGroup>
-      <ion-accordion *ngFor="let category of categories" [value]="category._id">
-        <ion-item slot="header">
-          <ion-icon name="list" slot="start"></ion-icon>
-          <ion-label>{{ category.name }}  ({{category.recipes?.length}})</ion-label>
-        </ion-item>
+  <div *ngIf="isLoading"  style="padding-top:5px; text-align: center;margin-bottom: 50%;">
+    <div style="margin: 0 auto;">
+      <img src="../../../assets/loader.gif" style="height:64px;width:64px"/> 
+      <div>Lade Rezepte...</div>
+    </div>
+  </div>
 
-        <ion-list slot="content">
-          <ion-item *ngFor="let recipe of category.recipes">
-            <ion-thumbnail slot="start"  [routerLink]="['/app/detail', recipe._id]">
-              <img [src]="recipe.image" alt="{{recipe.title}}">
-            </ion-thumbnail>
-            <ion-label [routerLink]="['/app/detail', recipe._id]">
-              <h2>{{ recipe.title }}</h2>
-              <p color="light">{{ recipe.portionsangabe}}</p>
-            </ion-label>
-            <ion-button fill="outline" shape="round" (click)="toggleFavorite(recipe)" color="light">
-              <ion-icon 
-                [name]="recipe.isFavorite ? 'heart' : 'heart-outline'" 
-                color="secondary">
-              </ion-icon>          
-            </ion-button>
-            <ion-button (click)="share(recipe)" slot="end" fill="outline" shape="round" color="light">
-              <ion-icon name="share-social-outline" color="dark"></ion-icon>
-            </ion-button>
-           
-            <ion-button (click)="deleteRecipe(recipe, category)" slot="end" fill="outline" shape="round" color="light">
-              <ion-icon name="close-outline" color="danger"></ion-icon>
-            </ion-button>
+  <ion-content>
+    <ion-list>
+      <ion-accordion-group #accordionGroup>
+        <ion-accordion *ngFor="let category of categories" [value]="category._id">
+          <ion-item slot="header">
+            <ion-icon name="list" slot="start"></ion-icon>
+            <ion-label>{{ category.name }}  ({{category.recipes?.length}})</ion-label>
           </ion-item>
-        </ion-list>
-      
-      </ion-accordion>
-    </ion-accordion-group>
-  </ion-list>
-</ion-content>
+  
+          <ion-list slot="content">
+            <ion-item *ngFor="let recipe of category.recipes">
+              <ion-thumbnail slot="start"  [routerLink]="['/app/detail', recipe._id]">
+                <img [src]="recipe.image" alt="{{recipe.title}}">
+              </ion-thumbnail>
+              <ion-label [routerLink]="['/app/detail', recipe._id]">
+                <h2>{{ recipe.title }}</h2>
+                <p color="light">{{ recipe.portionsangabe}}</p>
+              </ion-label>
+              <ion-button fill="outline" shape="round" (click)="toggleFavorite(recipe)" color="light">
+                <ion-icon 
+                  [name]="recipe.isFavorite ? 'heart' : 'heart-outline'" 
+                  color="secondary">
+                </ion-icon>          
+              </ion-button>
+              <ion-button (click)="share(recipe)" slot="end" fill="outline" shape="round" color="light">
+                <ion-icon name="share-social-outline" color="dark"></ion-icon>
+              </ion-button>             
+              <ion-button (click)="deleteRecipe(recipe, category)" slot="end" fill="outline" shape="round" color="light">
+                <ion-icon name="close-outline" color="danger"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-list>        
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-list>
+
+  </ion-content>
+  
+ 

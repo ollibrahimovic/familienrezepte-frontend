@@ -14,6 +14,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
 })
 export class SearchComponent  implements OnInit {
 
+  isLoading: Boolean = false;
   constructor(private recipeService: RecipeService) { 
 
   }
@@ -25,13 +26,15 @@ export class SearchComponent  implements OnInit {
   handleInput(event: Event) {
     const target = event.target as HTMLIonSearchbarElement;
     const query = target.value?.toLowerCase() || '';
-    if(query.length===0) {
+    if(query.length === 0) {
       this.results=[];
       return;
     }
     if(query.length>2) {
+      this.isLoading = true;
       this.recipeService.getRecipes()
       .subscribe(d => {
+        this.isLoading = false;
         this.results = d.filter((d) => d.title.toLowerCase().includes(query) || d.description.toLowerCase().includes(query))
       });
     }
