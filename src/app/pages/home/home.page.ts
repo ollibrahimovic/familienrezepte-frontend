@@ -21,6 +21,7 @@ export class HomePage {
 
   categories: Category[] = [];
   openAccordion: string=''; // Array zur Speicherung der geöffneten Akkordeons
+  isLoading: boolean = true;
 
   constructor(private recipeService: RecipeService,
     private alertController: AlertController,
@@ -71,6 +72,7 @@ export class HomePage {
       .pipe(
         map(data=>{
           this.categories = data;
+          this.isLoading = false;
           return this.categories;
         }), 
         map(data=>{

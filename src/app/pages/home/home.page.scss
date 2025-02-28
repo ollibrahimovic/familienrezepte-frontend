@@ -25,3 +25,31 @@
 #container a {
   text-decoration: none;
 }
+
+.div-hauptcontainer {
+  width:100%;
+  float: left;
+  justify-content: center; 
+  align-items: center;
+  border: 1px #ccc solid;  
+  }
+  
+  .div-container1 {
+  float: both;
+  margin-left: 0px;
+  margin-top: 0px;
+  width:100%;
+  justify-content: center; 
+  align-items: center;
+  border: 1px #110000 solid;
+  }
+  
+  .div-container2 {
+  float: both;
+  margin-left: 0px;
+  margin-top: 0px;
+  width:100%;
+  justify-content: center; 
+  align-items: center;
+  border: 1px #ff0000 solid;
+  }
