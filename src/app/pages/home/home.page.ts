@@ -7,6 +7,8 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Hier hinzufügen
 import { AlertController } from '@ionic/angular';
 import { map } from 'rxjs';
+import { Share } from '@capacitor/share';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +39,15 @@ export class HomePage {
   ionViewWillEnter() {
     this.reloadData();
   }
+
+  async share(recipe:Recipe) {
+    await Share.share({
+      title: recipe?.title,
+      text: 'Schau dir dieses Rezept von Familienrezepte an!',
+      url: `${environment.frontend}/app/detail/${recipe?._id}`,
+      dialogTitle: 'Rezept teilen',
+    });
+  }  
 
   saveAccordionState() {
     if (this.accordionGroup && typeof this.accordionGroup?.value === 'string') {

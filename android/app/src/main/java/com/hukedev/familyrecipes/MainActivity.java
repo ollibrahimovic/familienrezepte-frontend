@@ -1,4 +1,4 @@
-package com.hukedev.familienrezepte.app;
+package com.hukedev.familyrecipes;
 
 import com.getcapacitor.BridgeActivity;
 

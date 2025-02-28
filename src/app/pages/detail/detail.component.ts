@@ -4,6 +4,9 @@ import { Recipe } from 'src/app/model/recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { IonImg, IonItem, IonTitle, IonTab, IonTabButton, IonButtons, IonTabBar, IonTabs, IonToolbar, IonHeader, IonIcon, IonLabel, IonContent, IonAccordion, IonAccordionGroup, IonList, IonButton } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
+import { Share } from '@capacitor/share';
+import { environment } from 'src/environments/environment';
+
 
 
 @Component({
@@ -30,4 +33,13 @@ export class DetailComponent  implements OnInit {
       });
     }
   }
+ 
+  async share() {
+    await Share.share({
+      title: this.recipe?.title,
+      text: 'Schau dir dieses Rezept von Familienrezepte an!',
+      url: `${environment.frontend}/app/detail/${this.recipe?._id}`,
+      dialogTitle: 'Rezept teilen',
+    });
+  }  
 }
