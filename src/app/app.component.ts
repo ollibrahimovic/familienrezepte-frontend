@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { AlertController, IonApp, IonRouterOutlet,Platform } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { homeOutline,heartOutline, addCircleOutline, heart, removeOutline, closeOutline, restaurant, list,close } from 'ionicons/icons';
+import { homeOutline,heartOutline, addCircleOutline, heart, removeOutline, closeOutline, restaurant, list,close, shareSocialOutline } from 'ionicons/icons';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 
@@ -30,7 +30,8 @@ export class AppComponent {
       'close': close,
       'close-outline': closeOutline,
       'list': list,
-      'restaurant': restaurant
+      'restaurant': restaurant,
+      'share-social-outline': shareSocialOutline
     });   
   }
 

@@ -1,11 +1,17 @@
 <ion-header class="header">
   <ion-toolbar>
-    <ion-title>{{recipe?.title}}</ion-title>
+    <ion-item  lines="none">
+      <ion-title>{{recipe?.title}}</ion-title>
+      <ion-button size="small" color="light" (click)="share()" slot="end">
+        <ion-icon  name="share-social-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-item>   
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <img src="{{recipe?.image}}" class="detail_bild"/>
+ 
   <h2>Zutaten für {{recipe?.portionsangabe}}</h2>
   <ul>
     <li *ngFor="let ingredient of recipe?.ingredients">{{ ingredient }}</li>

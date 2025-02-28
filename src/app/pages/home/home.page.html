@@ -28,6 +28,10 @@
                 color="secondary">
               </ion-icon>          
             </ion-button>
+            <ion-button (click)="share(recipe)" slot="end" fill="outline" shape="round" color="light">
+              <ion-icon name="share-social-outline" color="dark"></ion-icon>
+            </ion-button>
+           
             <ion-button (click)="deleteRecipe(recipe, category)" slot="end" fill="outline" shape="round" color="light">
               <ion-icon name="close-outline" color="danger"></ion-icon>
             </ion-button>
