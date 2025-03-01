@@ -5,6 +5,11 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
+  <ion-button  fill="clear" (click)="takePicture()">
+    <img class="detail_bild" src="{{lastPhoto()}}"/>
+  </ion-button>
+
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
     <ion-list>
 
@@ -12,10 +17,6 @@
         <ion-input label="Titel" labelPlacement="floating"  formControlName="title" placeholder="Mein Rezept..."></ion-input>
       </ion-item>
 
-      <ion-item>
-        <ion-input labelPlacement="floating" formControlName="imageUrl" label="Bild-URL" placeholder="http://www.meinbild.de/essen.jpg"></ion-input>
-      </ion-item>
-  
       <ion-item>
         <ion-select formControlName="category" label="Kategorie" labelPlacement="floating">
           <ion-select-option *ngFor="let category of categories" [value]="category">{{ category.name }}</ion-select-option>
