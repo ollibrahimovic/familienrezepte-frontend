@@ -23,7 +23,7 @@
           <ion-list slot="content">
             <ion-item *ngFor="let recipe of category.recipes">
               <ion-thumbnail slot="start"  [routerLink]="['/app/detail', recipe._id]">
-                <img [src]="recipe.image" alt="{{recipe.title}}">
+                <img [src]="getPhoto(recipe)" alt="{{recipe.title}}">
               </ion-thumbnail>
               <ion-label [routerLink]="['/app/detail', recipe._id]">
                 <h2>{{ recipe.title }}</h2>

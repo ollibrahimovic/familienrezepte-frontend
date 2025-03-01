@@ -67,6 +67,15 @@ export class HomePage {
 
   }
 
+  getPhoto(recipe:Recipe) {
+    if(recipe && recipe.image) {
+      return recipe.image;
+    } else {
+      return `${environment.frontend}/assets/platzhalter.png`;
+    }
+  }
+ 
+
   reloadData() {
     this.recipeService.getCategories()
       .pipe(
