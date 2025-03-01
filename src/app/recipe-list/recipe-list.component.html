@@ -1,0 +1,27 @@
+<ion-list slot="content">
+  <ion-item *ngFor="let recipe of recipes">
+    <ion-thumbnail slot="start"  [routerLink]="['/app/detail', recipe._id]">
+      <img [src]="recipe.image" alt="{{recipe.title}}">
+    </ion-thumbnail>
+    <ion-label [routerLink]="['/app/detail', recipe._id]">
+      <h2>{{ recipe.title }}</h2>
+      <p color="light">{{ recipe.portionsangabe}}</p>
+    </ion-label>
+    <ion-button fill="outline" shape="round" (click)="toggleFavorite(recipe)" color="light">
+      <ion-icon 
+        [name]="recipe.isFavorite ? 'heart' : 'heart-outline'" 
+        color="secondary">
+      </ion-icon>          
+    </ion-button>
+    <ion-button (click)="share(recipe)" slot="end" fill="outline" shape="round" color="light">
+      <ion-icon name="share-social-outline" color="dark"></ion-icon>
+    </ion-button>             
+    <ion-button (click)="deleteRecipe(recipe)" slot="end" fill="outline" shape="round" color="light">
+      <ion-icon name="close-outline" color="danger"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-list>
+
+<!--
+IonList, IonItem, IonThumbnail, IonLabel, IonButton, IonIcon
+-->

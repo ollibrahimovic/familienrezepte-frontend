@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { IonTitle,IonSearchbar, IonSelect, IonSelectOption, IonItem, IonInput, IonTextarea, IonThumbnail, IonButtons, IonListHeader, IonToolbar, IonHeader, IonIcon, IonLabel, IonContent, IonAccordion, IonAccordionGroup, IonList, IonButton } from '@ionic/angular/standalone';
+import { IonTitle, IonSearchbar, IonToolbar,IonContent, IonHeader } from '@ionic/angular/standalone';
 import { Recipe } from 'src/app/model/recipe';
+import { RecipeListComponent } from 'src/app/recipe-list/recipe-list.component';
 import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  imports: [FormsModule, ReactiveFormsModule, IonSearchbar, IonHeader, IonItem, IonLabel, IonList, IonListHeader, CommonModule, IonTitle, IonSelect, IonSelectOption, IonInput, IonTextarea, IonToolbar, IonContent, IonList, IonItem, IonThumbnail, IonLabel, IonButtons, IonButton, IonIcon, RouterLink],
+  imports: [FormsModule, ReactiveFormsModule, RecipeListComponent, IonSearchbar,CommonModule, IonTitle, IonToolbar, IonContent, IonHeader],
 })
 export class SearchComponent  implements OnInit {
 
@@ -31,6 +31,7 @@ export class SearchComponent  implements OnInit {
       return;
     }
     if(query.length>2) {
+      this.results = [];
       this.isLoading = true;
       this.recipeService.getRecipes()
       .subscribe(d => {

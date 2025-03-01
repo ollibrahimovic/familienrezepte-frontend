@@ -1,22 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonItem, IonTitle, IonTab, IonTabButton, IonButtons, IonTabBar, IonTabs, IonToolbar, IonHeader, IonIcon, IonLabel, IonContent, IonAccordion, IonAccordionGroup, IonList, IonButton } from '@ionic/angular/standalone';
+import {  IonAccordionGroup, IonIcon,IonLabel, AlertController, IonItem, IonAccordion, IonList, IonContent, IonTitle, IonToolbar, IonHeader } from '@ionic/angular/standalone';
 import { Category } from '../../model/category';
 import { RecipeService } from '../../services/recipe.service';
-import { Recipe } from '../../model/recipe';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Hier hinzufügen
-import { AlertController } from '@ionic/angular';
 import { map } from 'rxjs';
-import { Share } from '@capacitor/share';
-import { environment } from 'src/environments/environment';
+import { RecipeListComponent } from 'src/app/recipe-list/recipe-list.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [CommonModule, IonButtons, IonTab, IonTabBar, IonTabButton, IonTabs, IonButton, IonTitle, IonToolbar, IonHeader, IonIcon,  IonItem, IonIcon, IonLabel, IonContent, IonList, IonAccordion, IonAccordionGroup, IonButton, RouterLink],
+  imports: [CommonModule, RecipeListComponent, IonIcon, IonLabel, IonItem, IonAccordionGroup, IonAccordion, IonList, IonContent, IonTitle, IonHeader, IonToolbar],
 })
-export class HomePage {
+export class HomeComponent {
   @ViewChild('accordionGroup', { static: true }) accordionGroup!: IonAccordionGroup;
 
   categories: Category[] = [];
@@ -40,15 +37,6 @@ export class HomePage {
   ionViewWillEnter() {
     this.reloadData();
   }
-
-  async share(recipe:Recipe) {
-    await Share.share({
-      title: recipe?.title,
-      text: 'Schau dir dieses Rezept von Familienrezepte an!',
-      url: `${environment.frontend}/app/detail/${recipe?._id}`,
-      dialogTitle: 'Rezept teilen',
-    });
-  }  
 
   saveAccordionState() {
     if (this.accordionGroup && typeof this.accordionGroup?.value === 'string') {
@@ -81,37 +69,5 @@ export class HomePage {
         })     
       )
       .subscribe();
-  }
-
-  async deleteRecipe(recipe: Recipe, category: Category) {
-      const alert = await this.alertController.create({
-        header: 'Rezept löschen',
-        message: 'Wollen Sie das Rezept wirklich löschen?',
-        buttons: [
-          {
-            text: 'Nein',
-            role: 'cancel'
-          },
-          {
-            text: 'Ja',
-            handler: () => {
-              category.recipes = category.recipes.filter((element) => {
-                return element._id !== recipe._id;
-              });;
-              this.recipeService.deleteRecipe(recipe._id!).subscribe(updatedRecipe => {
-                console.log(recipe.title,'wird gelöscht!');
-              });             
-            }
-          }
-        ]
-      });
-      await alert.present();
-  }
-
-  toggleFavorite(recipe: Recipe) {
-    recipe.isFavorite = !recipe.isFavorite;
-    this.recipeService.toggleFavorite(recipe._id!).subscribe(updatedRecipe => {
-      recipe.isFavorite = updatedRecipe.isFavorite;
-    });
   }
 }

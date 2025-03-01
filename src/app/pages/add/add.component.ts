@@ -5,19 +5,16 @@ import { Category } from 'src/app/model/category';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { AlertController} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { IonImg, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonTextarea, IonThumbnail, IonButtons, IonListHeader, IonToolbar, IonHeader, IonIcon, IonLabel, IonContent, IonAccordion, IonAccordionGroup, IonList, IonButton } from '@ionic/angular/standalone';
+import { IonImg, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonTextarea, IonListHeader, IonToolbar, IonHeader, IonIcon, IonLabel, IonContent, IonList, IonButton } from '@ionic/angular/standalone';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Camera, CameraResultType } from '@capacitor/camera';
 import { PhotoService } from 'src/app/services/photo.service';
 import { environment } from 'src/environments/environment';
-//import { Filesystem, Directory } from '@capacitor/filesystem';
-//import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss'],
-  imports: [FormsModule, ReactiveFormsModule, IonImg, IonHeader, IonItem, IonLabel, IonList, IonListHeader, CommonModule, IonTitle, IonSelect, IonSelectOption, IonInput, IonTextarea, IonToolbar, IonContent, IonList, IonItem, IonThumbnail, IonLabel, IonButtons, IonButton, IonIcon, RouterLink],
+  imports: [FormsModule, ReactiveFormsModule, IonHeader, IonItem, IonLabel, IonList, IonListHeader, CommonModule, IonTitle, IonSelect, IonSelectOption, IonInput, IonTextarea, IonToolbar, IonContent, IonList, IonItem, IonButton, IonIcon],
 
 })
 export class AddComponent  implements OnInit {

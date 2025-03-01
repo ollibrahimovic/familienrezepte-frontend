@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Recipe } from 'src/app/model/recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
-import { IonImg, IonItem, IonTitle, IonTab, IonTabButton, IonButtons, IonTabBar, IonTabs, IonToolbar, IonHeader, IonIcon, IonLabel, IonContent, IonAccordion, IonAccordionGroup, IonList, IonButton } from '@ionic/angular/standalone';
+import { IonTitle, IonToolbar, IonHeader, IonIcon, IonContent, IonButton, IonItem } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Share } from '@capacitor/share';
 import { environment } from 'src/environments/environment';
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
-  imports: [CommonModule,IonImg, IonButtons, IonTab, IonTabBar, IonTabButton, IonTabs, IonButton, IonTitle, IonToolbar, IonHeader, IonIcon,  IonItem, IonIcon, IonLabel, IonContent, IonList, IonAccordion, IonAccordionGroup, IonButton, RouterLink],
+  imports: [CommonModule,  IonButton, IonTitle, IonToolbar, IonHeader, IonIcon, IonItem, IonIcon, IonContent, IonButton],
 
 })
 export class DetailComponent  implements OnInit {
