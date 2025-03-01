@@ -28,6 +28,13 @@ export class RecipeListComponent  implements OnInit {
     console.log("RECIPESLIST", this.recipes);
   }
   
+  getPicture(recipe: Recipe) {
+    if(recipe.image) {    
+      return `${recipe.image}`;
+    }
+    return `${environment.frontend}/assets/platzhalter.png`;
+  }
+
   async deleteRecipe(recipe: Recipe) {
     const alert = await this.alertController.create({
       header: 'Rezept löschen',

@@ -33,11 +33,18 @@ export class DetailComponent  implements OnInit {
       });
     }
   }
+
+  getPicture() {
+    if(this.recipe && this.recipe.image) {    
+      return `${this.recipe.image}`;
+    }
+    return `${environment.frontend}/assets/platzhalter.png`;
+  }
  
   async share() {
     await Share.share({
       title: this.recipe?.title,
-      text: 'Schau dir dieses Rezept von Familienrezepte an!',
+      text: `Schau dir das Rezept '${this.recipe?.title}' von Familienrezepte an!`,
       url: `${environment.frontend}/app/detail/${this.recipe?._id}`,
       dialogTitle: 'Rezept teilen',
     });
