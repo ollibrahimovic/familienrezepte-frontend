@@ -5,14 +5,19 @@ import { Category } from 'src/app/model/category';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { AlertController} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonTextarea, IonThumbnail, IonButtons, IonListHeader, IonToolbar, IonHeader, IonIcon, IonLabel, IonContent, IonAccordion, IonAccordionGroup, IonList, IonButton } from '@ionic/angular/standalone';
+import { IonImg, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonTextarea, IonThumbnail, IonButtons, IonListHeader, IonToolbar, IonHeader, IonIcon, IonLabel, IonContent, IonAccordion, IonAccordionGroup, IonList, IonButton } from '@ionic/angular/standalone';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { PhotoService } from 'src/app/services/photo.service';
+import { environment } from 'src/environments/environment';
+//import { Filesystem, Directory } from '@capacitor/filesystem';
+//import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss'],
-  imports: [FormsModule, ReactiveFormsModule, IonHeader, IonItem, IonLabel, IonList, IonListHeader, CommonModule, IonTitle, IonSelect, IonSelectOption, IonInput, IonTextarea, IonToolbar, IonContent, IonList, IonItem, IonThumbnail, IonLabel, IonButtons, IonButton, IonIcon, RouterLink],
+  imports: [FormsModule, ReactiveFormsModule, IonImg, IonHeader, IonItem, IonLabel, IonList, IonListHeader, CommonModule, IonTitle, IonSelect, IonSelectOption, IonInput, IonTextarea, IonToolbar, IonContent, IonList, IonItem, IonThumbnail, IonLabel, IonButtons, IonButton, IonIcon, RouterLink],
 
 })
 export class AddComponent  implements OnInit {
@@ -24,12 +29,13 @@ export class AddComponent  implements OnInit {
     private fb: FormBuilder,
     private recipeService: RecipeService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private photoService: PhotoService
   ) {
 
     this.recipeForm = this.fb.group({
       title: ['', Validators.required],
-      imageUrl: ['', [Validators.required, Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/)]],
+      imageUrl: [''],
       category: ['', Validators.required],
       portionsangabe: [''],
       description: ['', Validators.required],
@@ -61,6 +67,32 @@ export class AddComponent  implements OnInit {
     this.ingredients.removeAt(index);
   }
 
+  async takePicture() {
+    await this.photoService.selectImage();
+     /* const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Uri
+      });
+
+      // image.webPath will contain a path that can be set as an image src.
+      // You can access the original file using image.path, which can be
+      // passed to the Filesystem API to read the raw data of the image,
+      // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+      var imageUrl = image.webPath;
+
+      // Can be set to the src of an image now
+      //imageElement.src = imageUrl;*/
+   
+  }
+
+  lastPhoto() {
+    if(this.photoService.lastSelected && this.photoService.lastSelected.base64) {    
+      return `${this.photoService.lastSelected.base64}`;
+    }
+    return `${environment.frontend}/assets/platzhalter.png`;
+  }
+
   async presentCancelAlert() {
     const alert = await this.alertController.create({
       header: 'Abbrechen',
@@ -86,7 +118,7 @@ export class AddComponent  implements OnInit {
       const formData = this.recipeForm.value;
       const recipe = {
         title: formData.title,
-        image: formData.imageUrl,
+        image: this.photoService.lastSelected?.base64,
         category: formData.category,
         description: formData.description,
         ingredients: formData.ingredients.map((ingredient: any) => ingredient.name),
