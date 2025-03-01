@@ -6,6 +6,7 @@ import { addIcons } from 'ionicons';
 import { homeOutline,heartOutline, addCircleOutline, heart, removeOutline, closeOutline, restaurant, list,close, shareSocialOutline, camera } from 'ionicons/icons';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
 
 @Component({
   selector: 'app-root',
@@ -34,6 +35,9 @@ export class AppComponent {
       'share-social-outline': shareSocialOutline,
       'camera': camera
     });   
+
+    Keyboard.setAccessoryBarVisible({ isVisible: true }); // Falls du eine Leiste über der Tastatur willst
+    Keyboard.setResizeMode({ mode: KeyboardResize.Body }); // Alternativ 'ionic' testen
   }
 
   initializeApp() {

@@ -5,10 +5,11 @@ import { Category } from 'src/app/model/category';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { AlertController} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { IonImg, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonTextarea, IonListHeader, IonToolbar, IonHeader, IonIcon, IonLabel, IonContent, IonList, IonButton } from '@ionic/angular/standalone';
+import { IonImg, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonTextarea, IonListHeader, IonToolbar, IonHeader, IonIcon, IonLabel, IonContent, IonList, IonButton, Platform } from '@ionic/angular/standalone';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PhotoService } from 'src/app/services/photo.service';
 import { environment } from 'src/environments/environment';
+import { Keyboard } from '@capacitor/keyboard';
 
 @Component({
   selector: 'app-add',
@@ -27,18 +28,22 @@ export class AddComponent  implements OnInit {
     private recipeService: RecipeService,
     private router: Router,
     private alertController: AlertController,
-    private photoService: PhotoService
-  ) {
+    private photoService: PhotoService,
+    private platform: Platform) {
 
-    this.recipeForm = this.fb.group({
-      title: ['', Validators.required],
-      imageUrl: [''],
-      category: ['', Validators.required],
-      portionsangabe: [''],
-      description: ['', Validators.required],
-      ingredients: this.fb.array([this.createIngredientField()], Validators.minLength(1))
-    })
-  }
+      this.platform.ready().then(() => {
+        //this.keyboardBehavior();
+      });
+
+      this.recipeForm = this.fb.group({
+        title: ['', Validators.required],
+        imageUrl: [''],
+        category: ['', Validators.required],
+        portionsangabe: [''],
+        description: ['', Validators.required],
+        ingredients: this.fb.array([this.createIngredientField()], Validators.minLength(1))
+      })
+    }
 
   ngOnInit() {
     this.recipeService.getCategories().subscribe((cats) => {
@@ -48,6 +53,16 @@ export class AddComponent  implements OnInit {
 
   get ingredients() {
     return this.recipeForm.get('ingredients') as FormArray;
+  }
+
+  keyboardBehavior() {
+    Keyboard.addListener('keyboardWillShow', (info) => {
+      document.body.classList.add('keyboard-is-open');
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      document.body.classList.remove('keyboard-is-open');
+    });
   }
 
   createIngredientField(): FormGroup {
