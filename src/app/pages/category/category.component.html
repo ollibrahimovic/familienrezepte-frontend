@@ -1,9 +1,9 @@
-<ion-header class="header">
+<!--<ion-header class="header">
   <ion-toolbar>
     <ion-title>{{getName()}} ({{getRecipes().length}})</ion-title>
   </ion-toolbar>
 </ion-header>
-
+-->
 <ion-content>
   <ion-grid>
       <ion-row>
@@ -11,7 +11,7 @@
           <div class="image-wrapper">
             <img [src]="getImage()" alt="{{getName()}}" />
             <div class="image-overlay">
-              {{ getName() }}
+              {{ getName() }} ({{getRecipes().length}})
             </div>
           </div>
         </ion-col>

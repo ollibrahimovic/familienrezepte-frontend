@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonTitle, IonSearchbar, IonToolbar,IonContent, IonHeader } from '@ionic/angular/standalone';
+import { IonTitle, IonSearchbar, IonToolbar,IonContent, IonHeader, IonGrid, IonCol, IonRow } from '@ionic/angular/standalone';
 import { Recipe } from 'src/app/model/recipe';
 import { RecipeListComponent } from 'src/app/recipe-list/recipe-list.component';
 import { RecipeService } from 'src/app/services/recipe.service';
@@ -10,7 +10,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  imports: [FormsModule, ReactiveFormsModule, RecipeListComponent, IonSearchbar,CommonModule, IonTitle, IonToolbar, IonContent, IonHeader],
+  imports: [FormsModule, ReactiveFormsModule, RecipeListComponent, IonGrid, IonCol, IonRow, IonSearchbar,CommonModule, IonTitle, IonToolbar, IonContent, IonHeader],
 })
 export class SearchComponent  implements OnInit {
 
