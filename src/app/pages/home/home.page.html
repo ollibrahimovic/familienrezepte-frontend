@@ -4,14 +4,40 @@
   </ion-toolbar>
 </ion-header>
 
-  <div *ngIf="isLoading"  style="padding-top:5px; text-align: center;margin-bottom: 50%;">
-    <div style="margin: 0 auto;">
-      <img src="../../../assets/loader.gif" style="height:64px;width:64px"/> 
-      <div>Lade Rezepte...</div>
-    </div>
+<div *ngIf="isLoading"  style="padding-top:5px; text-align: center;margin-bottom: 50%;">
+  <div style="margin: 0 auto;">
+    <img src="../../../assets/loader.gif" style="height:64px;width:64px"/> 
+    <div>Lade Rezepte...</div>
   </div>
+</div>
 
-  <ion-content>
+<ion-content>
+
+  <ion-grid>
+    <ng-container *ngFor="let i of categories; let index = index">
+      <ion-row *ngIf="index % 2 === 0">
+        <ion-col class="image-container">
+          <a class="image-wrapper" [routerLink]="['/app/category', categories[index]?._id, categories[index]?.image, categories[index]?.name]">
+            <img [src]="getImage(categories[index])" alt="{{categories[index]?.name}}" />
+            <div class="image-overlay">
+              {{ categories[index]?.name }}
+            </div>
+          </a>
+        </ion-col>
+        <ion-col *ngIf="categories[index + 1]" class="image-container">
+          <a class="image-wrapper" [routerLink]="['/app/category', categories[index+1]?._id, categories[index+1]?.image, categories[index+1]?.name]">
+            <img [src]="getImage(categories[index+1])" alt="{{categories[index+1]?.name}}" />
+            <div class="image-overlay">
+              {{ categories[index+1]?.name }}
+            </div>
+          </a>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+  </ion-grid>
+   
+<!--
+
     <ion-list>
       <ion-accordion-group #accordionGroup>
         <ion-accordion *ngFor="let category of categories" [value]="category._id">
@@ -25,5 +51,5 @@
         </ion-accordion>
       </ion-accordion-group>
     </ion-list>
-
+  -->
   </ion-content>

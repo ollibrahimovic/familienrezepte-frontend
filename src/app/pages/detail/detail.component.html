@@ -10,7 +10,20 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <img [src]="getPicture()" class="detail_bild"/>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="image-container">
+        <div class="image-wrapper">
+          <img [src]="getPicture()" alt="{{recipe?.title}}" />
+          <div class="image-overlay">
+            {{recipe?.title}}
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!--<img [src]="getPicture()" class="detail_bild"/>-->
  
   <h2>Zutaten für {{recipe?.portionsangabe}}</h2>
   <ul>

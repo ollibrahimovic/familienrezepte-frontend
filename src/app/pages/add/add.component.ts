@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { IonImg, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonTextarea, IonListHeader, IonToolbar, IonHeader, IonIcon, IonLabel, IonContent, IonList, IonButton, Platform } from '@ionic/angular/standalone';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PhotoService } from 'src/app/services/photo.service';
-import { environment } from 'src/environments/environment';
 import { Keyboard } from '@capacitor/keyboard';
 
 @Component({
@@ -87,7 +86,7 @@ export class AddComponent  implements OnInit {
     if(this.photoService.lastSelected && this.photoService.lastSelected.base64) {    
       return `${this.photoService.lastSelected.base64}`;
     }
-    return `${environment.frontend}/assets/platzhalter.png`;
+    return `/assets/platzhalter.png`;
   }
 
   async presentCancelAlert() {
@@ -120,11 +119,14 @@ export class AddComponent  implements OnInit {
         description: formData.description,
         ingredients: formData.ingredients.map((ingredient: any) => ingredient.name),
         portionsangabe: formData.portionsangabe,
+        zubereitungszeit: 0,
         isFavorite: false
       };
 
-      this.recipeService.addRecipe(recipe).subscribe(() => {
-        this.router.navigate(['/']);
+      this.recipeService.addRecipe(recipe).subscribe((d) => {
+        this.recipeForm.reset();
+        this.photoService.removeLastSelected();
+        this.router.navigate(['/app/detail/', d._id]);
       });
     }
   }

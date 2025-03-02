@@ -34,6 +34,11 @@ export class RecipeService {
         return this.http.get<Category[]>(this.apiUrlCategories);
     }
 
+    // Einzelnes Rezept abrufen
+    getCategory(id: string): Observable<Category> {
+        return this.http.get<Category>(`${this.apiUrlCategory}/${id}`);
+    }
+
     getRecipesOfCategory(cat:Category): Observable<Recipe[]> {
         return this.http.get<Recipe[]>(`${this.apiUrl}/category/${cat._id}`, {});
     }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonTitle, IonToolbar, IonHeader, IonContent } from '@ionic/angular/standalone';
+import { IonTitle, IonToolbar, IonHeader, IonContent, IonCol, IonRow, IonGrid } from '@ionic/angular/standalone';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../model/recipe';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { RecipeListComponent } from 'src/app/recipe-list/recipe-list.component';
   selector: 'app-favs',
   templateUrl: 'favs.component.html',
   styleUrls: ['favs.component.scss'],
-  imports: [CommonModule, RecipeListComponent, IonTitle, IonToolbar, IonHeader, IonContent],
+  imports: [CommonModule, IonGrid, IonCol, IonRow, RecipeListComponent, IonTitle, IonToolbar, IonHeader, IonContent],
 })
 export class FavsComponent{
   recipes: Recipe[] = [];

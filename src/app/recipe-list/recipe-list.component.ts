@@ -32,7 +32,7 @@ export class RecipeListComponent  implements OnInit {
     if(recipe.image) {    
       return `${recipe.image}`;
     }
-    return `${environment.frontend}/assets/platzhalter.png`;
+    return `/assets/platzhalter.png`;
   }
 
   async deleteRecipe(recipe: Recipe) {

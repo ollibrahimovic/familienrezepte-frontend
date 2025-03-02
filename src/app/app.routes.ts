@@ -25,6 +25,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/favs/favs.component').then((m) => m.FavsComponent),
       },
       {
+        path: 'category/:id/:img/:name',
+        loadComponent: () => import('./pages/category/category.component').then((m) => m.CategoryComponent),
+      },
+      {
         path: 'search',
         loadComponent: () => import('./pages/search/search.component').then((m) => m.SearchComponent),
       },

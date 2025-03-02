@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Recipe } from 'src/app/model/recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
-import { IonTitle, IonToolbar, IonHeader, IonIcon, IonContent, IonButton, IonItem } from '@ionic/angular/standalone';
+import { IonTitle, IonToolbar, IonHeader, IonIcon, IonContent, IonButton, IonItem, IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Share } from '@capacitor/share';
 import { environment } from 'src/environments/environment';
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
-  imports: [CommonModule,  IonButton, IonTitle, IonToolbar, IonHeader, IonIcon, IonItem, IonIcon, IonContent, IonButton],
+  imports: [CommonModule, IonGrid, IonCol, IonRow, IonButton, IonTitle, IonToolbar, IonHeader, IonIcon, IonItem, IonIcon, IonContent, IonButton]
 
 })
 export class DetailComponent  implements OnInit {
@@ -38,7 +38,7 @@ export class DetailComponent  implements OnInit {
     if(this.recipe && this.recipe.image) {    
       return `${this.recipe.image}`;
     }
-    return `${environment.frontend}/assets/platzhalter.png`;
+    return `/assets/platzhalter.png`;
   }
  
   async share() {

@@ -6,6 +6,7 @@ export interface Recipe {
     ingredients: string[];
     description: string;
     image: string | undefined;
+    zubereitungszeit: Number;
     portionsangabe: string;
     category: Category;
     isFavorite: boolean;

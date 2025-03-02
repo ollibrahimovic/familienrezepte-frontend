@@ -78,5 +78,9 @@ export class PhotoService {
 
         return resizedCanvas.toDataURL("image/jpeg", 0.7); // Komprimierung auf 70%
     }
+
+    removeLastSelected() {
+        this.lastSelected = undefined;
+    }
 }
 
