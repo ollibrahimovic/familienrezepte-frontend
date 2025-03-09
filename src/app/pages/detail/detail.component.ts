@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Recipe } from 'src/app/model/recipe';
+import { Recipe } from 'src/app/model/Recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { IonTitle, IonToolbar, IonHeader, IonIcon, IonContent, IonButton, IonItem, IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
@@ -28,8 +28,9 @@ export class DetailComponent  implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.recipeService.getRecipe(id).subscribe(data => {
-        this.recipe = data;
+      this.recipeService.getRecipe(id)
+        .subscribe(data => {
+          this.recipe = data;
       });
     }
   }

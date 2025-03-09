@@ -63,7 +63,7 @@
 .header {
   --sat: env(safe-area-inset-top);
 
-	padding-top: max(30px, var(--sat)); // Define a minimum safe space by default
+	padding-top: max(35px, var(--sat)); // Define a minimum safe space by default
 		
 	html.plt-ios & {
 		padding-top: var(--sat); // Use the detected safe-space for IOS because I always get a good value

@@ -23,9 +23,7 @@
     </ion-row>
   </ion-grid>
 
-  <!--<img [src]="getPicture()" class="detail_bild"/>-->
- 
-  <h2>Zutaten für {{recipe?.portionsangabe}}</h2>
+  <h2>Zutaten für {{recipe?.servings}}</h2>
   <ul>
     <li *ngFor="let ingredient of recipe?.ingredients">{{ ingredient }}</li>
   </ul>

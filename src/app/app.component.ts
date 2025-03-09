@@ -1,21 +1,21 @@
-import { Component, NgZone, Optional, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { AlertController, IonApp, IonRouterOutlet,Platform } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { homeOutline,heartOutline, addCircleOutline, heart, removeOutline, closeOutline, restaurant, list,close, shareSocialOutline, camera } from 'ionicons/icons';
 import { Location } from '@angular/common';
-import { environment } from 'src/environments/environment';
 import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   imports: [IonApp, IonRouterOutlet],
+  standalone: true
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   constructor(private router: Router, private zone: NgZone, private platform: Platform, private location: Location,  // Hier hinzufügen
-    private alertController: AlertController,
+    private alertController: AlertController, 
     @Optional() private routerOutlet?: IonRouterOutlet
   ) {
 
@@ -40,7 +40,13 @@ export class AppComponent {
     Keyboard.setResizeMode({ mode: KeyboardResize.Body }); // Alternativ 'ionic' testen
   }
 
+  ngOnInit(): void {
+  
+  }
+
   initializeApp() {
+
+    
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
         this.zone.run(() => {
             // Example url: https://beerswift.app/tabs/tab2
