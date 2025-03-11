@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { IonTitle, IonToolbar, IonHeader, IonContent, IonCol, IonRow, IonGrid } from '@ionic/angular/standalone';
+import { IonHeader, IonContent, IonCol, IonRow, IonGrid } from '@ionic/angular/standalone';
 import { RecipeService } from '../../services/recipe.service';
-import { Recipe } from '../../model/recipe';
-import { Router } from '@angular/router';
+import { Recipe } from '../../model/Recipe';
 import { CommonModule } from '@angular/common'; // Hier hinzufügen
 import { RecipeListComponent } from 'src/app/recipe-list/recipe-list.component';
 
@@ -10,18 +9,19 @@ import { RecipeListComponent } from 'src/app/recipe-list/recipe-list.component';
   selector: 'app-favs',
   templateUrl: 'favs.component.html',
   styleUrls: ['favs.component.scss'],
-  imports: [CommonModule, IonGrid, IonCol, IonRow, RecipeListComponent, IonTitle, IonToolbar, IonHeader, IonContent],
+  imports: [CommonModule, IonGrid, IonCol, IonRow, RecipeListComponent, IonHeader, IonContent],
+  standalone: true
 })
 export class FavsComponent{
   recipes: Recipe[] = [];
   
-  constructor(private recipeService: RecipeService,
-    private router: Router
+  constructor(private recipeService: RecipeService
   ) {
     
   }
 
   ngOnInit() {
+
   }
 
   ionViewWillEnter() {
@@ -29,12 +29,7 @@ export class FavsComponent{
     this.reloadData();
   }
 
-  reloadData() {
-    this.recipeService.getRecipes()
-      .subscribe(data => {       
-        this.recipes = data.filter(d=>d.isFavorite);
-        console.log("FAVS", this.recipes);
-        return this.recipes;
-    });
+  async reloadData() {
+    this.recipes = (await this.recipeService.getRecipes()).filter(d => d.isFavorite);
   }
 }

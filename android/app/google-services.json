@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "121613746719",
+    "project_id": "hukedev-familyrecipes",
+    "storage_bucket": "hukedev-familyrecipes.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121613746719:android:7b68793ea9882c60414b2a",
+        "android_client_info": {
+          "package_name": "com.hukedev.familyrecipes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "121613746719-isi77hodh4ga4oqn2f9ip4lctervcslp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hukedev.familyrecipes",
+            "certificate_hash": "28f55d04bde957c5d85a357288de45b2c7e7779d"
+          }
+        },
+        {
+          "client_id": "121613746719-vd01qed3di4n855orn5gt8r2kg38lftf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABnY2uw_PNNfikOPDWC3mHdODUiDgfciQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "121613746719-vd01qed3di4n855orn5gt8r2kg38lftf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

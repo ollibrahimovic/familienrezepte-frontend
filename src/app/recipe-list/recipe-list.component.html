@@ -5,7 +5,7 @@
     </ion-thumbnail>
     <ion-label [routerLink]="['/app/detail', recipe._id]">
       <h2>{{ recipe.title }}</h2>
-      <p color="light">{{ recipe.portionsangabe}}</p>
+      <p color="light">{{ recipe.servings}}</p>
     </ion-label>
     <ion-button fill="outline" shape="round" (click)="toggleFavorite(recipe)" color="light">
       <ion-icon 
@@ -21,7 +21,3 @@
     </ion-button>
   </ion-item>
 </ion-list>
-
-<!--
-IonList, IonItem, IonThumbnail, IonLabel, IonButton, IonIcon
--->

@@ -1,9 +1,11 @@
-import { Recipe } from "./recipe";
+import { Recipe } from "./Recipe";
 
 export interface Category {
   _id?: string;
   name: string;
   image: string;
-  sort:number;
-  recipes: Recipe[]
+  description: string;
+  sorting: number;
+  addedAt?: Date;
+  recipes?: Recipe[];
 }

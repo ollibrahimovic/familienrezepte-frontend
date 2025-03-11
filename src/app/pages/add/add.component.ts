@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Category } from 'src/app/model/category';
+import { Category } from 'src/app/model/Category';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { AlertController} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
@@ -9,6 +9,7 @@ import { IonImg, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonTex
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PhotoService } from 'src/app/services/photo.service';
 import { Keyboard } from '@capacitor/keyboard';
+import { Recipe } from 'src/app/model/Recipe';
 
 @Component({
   selector: 'app-add',
@@ -112,14 +113,14 @@ export class AddComponent  implements OnInit {
   onSubmit() {
     if (this.recipeForm.valid) {
       const formData = this.recipeForm.value;
-      const recipe = {
+      const recipe:Recipe = {
         title: formData.title,
         image: this.photoService.lastSelected?.base64,
         category: formData.category,
         description: formData.description,
         ingredients: formData.ingredients.map((ingredient: any) => ingredient.name),
-        portionsangabe: formData.portionsangabe,
-        zubereitungszeit: 0,
+        servings: formData.portionsangabe,
+        preparationTime: 0,
         isFavorite: false
       };
 

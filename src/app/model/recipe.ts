@@ -1,13 +1,15 @@
-import { Category } from "./category";
+import { Category } from "./Category";
+import { Ingredient } from "./Ingredient";
 
 export interface Recipe {
-    _id?: string;
-    title: string;
-    ingredients: string[];
-    description: string;
-    image: string | undefined;
-    zubereitungszeit: Number;
-    portionsangabe: string;
-    category: Category;
-    isFavorite: boolean;
-  }
+  _id?: string;
+  title: string;
+  servings: string;
+  description: string;
+  ingredients: Ingredient[];
+  category: Category | string;
+  image: string| undefined;
+  preparationTime: number;
+  addedAt?: Date;
+  isFavorite: Boolean;
+}

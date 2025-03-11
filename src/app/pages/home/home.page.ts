@@ -1,29 +1,33 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonCol, IonGrid, IonRow, IonAccordionGroup, IonIcon,IonLabel, AlertController, IonItem, IonAccordion, IonList, IonContent, IonTitle, IonToolbar, IonHeader } from '@ionic/angular/standalone';
-import { Category } from '../../model/category';
+import { Component, OnInit } from '@angular/core';
+import { IonCol, IonGrid, IonRow, IonContent, IonTitle, IonToolbar, IonHeader } from '@ionic/angular/standalone';
+import { Category } from '../../model/Category';
 import { RecipeService } from '../../services/recipe.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Hier hinzufügen
 import { map } from 'rxjs';
-import { RecipeListComponent } from 'src/app/recipe-list/recipe-list.component';
-import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [CommonModule, RecipeListComponent, 
+  imports: [CommonModule, 
     RouterModule,
-    IonGrid, IonCol, IonRow,
-    IonIcon, IonLabel, IonItem, IonAccordionGroup, IonAccordion, IonList, IonContent, IonTitle, IonHeader, IonToolbar],
+    IonGrid, IonCol, IonRow, IonContent, IonTitle, IonHeader, IonToolbar],
+    standalone: true
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   categories: Category[] = [];
   isLoading: boolean = true;
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService, private userService: AuthService) {
 
-  ngOnInit() {
+  }
+  ngOnInit(): void {
+    this.userService.signInAnonymously()
+      .then(userId => {
+        console.log('Eingeloggte User-ID:', userId);
+    });
   }
 
   getImage(category: Category) {
